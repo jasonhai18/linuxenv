@@ -4,10 +4,10 @@
 	sudo apt-get purge nvidia*
 ## 禁用自带的 nouveau nvidia驱动
 	
-sudo vim /etc/modprobe.d/blacklist-nouveau.conf
+>sudo vim /etc/modprobe.d/blacklist-nouveau.conf
 
-blacklist nouveau
-options nouveau modeset=0
+>blacklist nouveau
+>options nouveau modeset=0
 
 再更新一下
 	sudo update-initramfs -u
