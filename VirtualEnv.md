@@ -89,3 +89,19 @@ Finally, if you want to delete your environment, type
 
 	rmvirtualenv test
 Enjoy!
+
+## Install pip3 for python3.6 in Ubuntu 16.08 LTS (not remove python3.5)
+### Install python3.6
+	sudo add-apt-repository ppa:jonathonf/python-3.6
+	sudo apt-get update
+	sudo apt-get install python3.6
+### let python3 --version(default) as python3.6
+	sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.5 1
+	sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2
+	sudo update-alternatives --config python3
+————————————————
+版权声明：本文为CSDN博主「lzzyok」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/lzzyok/article/details/77413968
+### Then install pip3 use 
+	`sudo apt-get install python3-pip
+
