@@ -7,6 +7,7 @@
 >sudo vim /etc/modprobe.d/blacklist-nouveau.conf
 
 >blacklist nouveau
+
 >options nouveau modeset=0
 
 再更新一下
