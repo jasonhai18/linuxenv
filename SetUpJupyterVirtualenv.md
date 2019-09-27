@@ -40,7 +40,7 @@ Congratulations, you have installed Jupyter Notebook! To run the notebook, run t
 # Setting up the virtual environment for Jupyter
 ## Find the Virtualenv pwd
 Go to
-  cd /.virtualenvs/
+  >cd /.virtualenvs/
 to find how many virtualenvs you create. Then go to
   ~/.virtualenvs/tf-gpu/bin
 to find the python file(python is the default configuration language in your virtualenv, not python3 or python2).
