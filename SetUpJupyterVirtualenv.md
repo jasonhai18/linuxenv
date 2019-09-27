@@ -6,7 +6,9 @@ If you use conda, you can install it with:
 ```
 ## pip
 If you use pip, you can install it with:
+```Bash
   pip install jupyterlab
+ ```
 If installing using pip install --user, you must add the user-level bin directory to your PATH environment variable in order to launch jupyter lab.
 
 # Getting started with the classic Jupyter Notebook
