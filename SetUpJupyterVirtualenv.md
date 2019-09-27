@@ -1,7 +1,9 @@
 # Getting started with JupyterLab
 ## conda
 If you use conda, you can install it with:
+```  
   conda install -c conda-forge jupyterlab
+```
 ## pip
 If you use pip, you can install it with:
   pip install jupyterlab
@@ -12,7 +14,7 @@ If installing using pip install --user, you must add the user-level bin director
 While Jupyter runs code in many programming languages, Python is a requirement (Python 3.3 or greater, or Python 2.7) for installing the JupyterLab or the classic Jupyter Notebook.
 
 ## Installing Jupyter Notebook using Anaconda
-We strongly recommend installing Python and Jupyter using the Anaconda Distribution, which includes Python, the Jupyter Notebook, and other commonly used packages for scientific computing and data science.
+We strongly recommend installing Python and Jupyter using the `Anaconda` Distribution, which includes Python, the Jupyter Notebook, and other commonly used packages for scientific computing and data science.
 
 First, download Anaconda. We recommend downloading Anaconda’s latest Python 3 version.
 
