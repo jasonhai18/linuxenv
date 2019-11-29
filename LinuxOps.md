@@ -1,3 +1,16 @@
+## Cute plugins
+### system monitor
+```terminal
+sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
+sudo apt-get update
+sudo apt-get install indicator-sysmonitor
+```
+To open system monitor
+```terminal
+indicator-sysmonitor &
+```
+Reboot
+
 ### 编译并运行shell文件
 ```
 chmod +x .sh
