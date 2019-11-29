@@ -19,7 +19,7 @@ then run
 
 	echo "source /usr/share/virtualenvwrapper/virtualenvwrapper.sh" >> ~/.bashrc
 ### Using pip
-####Install and/or update pip
+#### Install and/or update pip
 
 >Install pip for Python 2 with
 
