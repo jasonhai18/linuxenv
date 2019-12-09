@@ -87,4 +87,18 @@ python3 train_abb.py
 ```
 ## Testing
 
+# Tips and Tricks
+## Learning Rate Strategy
+``` python
+if global_steps < warmup_steps:
+lr = global_steps / warmup_steps * cfg.TRAIN.LR_INIT
+else:
+lr = cfg.TRAIN.LR_END + 0.5 * (cfg.TRAIN.LR_INIT - cfg.TRAIN.LR_END) * (
+    (1 + tf.cos((global_steps - warmup_steps) / (total_steps - warmup_steps) * np.pi))
+)
+```
+<p align="center">
+    <img width="60%" src="https://pjreddie.com/media/image/Screen_Shot_2018-03-24_at_10.48.42_PM.png" style="max-width:80%;">
+    </a>
+</p>
 
