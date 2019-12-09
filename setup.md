@@ -13,9 +13,9 @@ tqdm
 
 EasyDict
 
-## 显卡驱动
+## Nvidia driver
 https://github.com/xzhengethz/linuxenv/blob/master/NvidiaDriver.md
-## virtualenvwrapper配置虚拟环境
+## Set upo
 ### pip
 https://github.com/xzhengethz/linuxenv/blob/master/VirtualEnv.md
 ### conda
@@ -32,13 +32,19 @@ conda create -n <VirtualEnv> python=3.6 pip tensorflow <package>
 conda activate <VirtualEnv>
 pip install opencv-python
 ```
+# make your own dataset
+## label the image
+github repository: https://github.com/tzutalin/labelImg
+```
+pip install labelImg
+```
+Here we use the Pascal VOC format to label the image(.xml).
+## folder
+All folders are made using the Pascal VOC template.
+## Convert the Pascal VOC format to the one which is used in YOLO v3 project
+-
+-
+-
 
-## 配置模型训练环境
-
-tensorflow 2.0
-numpy
-opencv
-tqdm
-EasyDict
 
 
