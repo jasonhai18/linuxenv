@@ -43,13 +43,13 @@ All folders are made using the Pascal VOC template.
 ```
 --- data --- dataset_a --- dataset_a + year --- Annotations
 	 |				    |- ImageSets --- Main
-	 |				    |- jpegImages
+	 |				    |- JPEGImages
 	 |-- dataset_b --- dataset_a + year --- Annotations
 	 |				    |- ImageSets --- Main
-	 |				    |- jpegImages
+	 |				    |- JPEGImages
          |-- dataset_c --- dataset_a + year --- Annotations
 	 |				    |- ImageSets --- Main
-	 |				    |- jpegImages
+	 |				    |- JPEGImages
 ```
 ## Train and Validation Set
 Randomly split all data into train, val and test set.
