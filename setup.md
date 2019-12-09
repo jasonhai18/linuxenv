@@ -21,11 +21,17 @@ https://github.com/xzhengethz/linuxenv/blob/master/VirtualEnv.md
 ### conda
 #### install anaconda
 download Anaconda3-2019.10-Linux-x86_64.sh from https://www.anaconda.com/distribution/
-'''
-  cd ./
-  chmod +x Anaconda3-2019.10-Linux-x86_64.sh
-  ./Anaconda3-2019.10-Linux-x86_64.sh
-'''
+```
+cd ./
+chmod +x Anaconda3-2019.10-Linux-x86_64.sh
+./Anaconda3-2019.10-Linux-x86_64.sh
+```
+#### create virtual environment with anaconda
+```
+conda create -n <VirtualEnv> python=3.6 pip tensorflow <package>
+conda activate <VirtualEnv>
+pip install opencv-python
+```
 
 ## 配置模型训练环境
 
