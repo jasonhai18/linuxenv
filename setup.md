@@ -22,9 +22,9 @@ https://github.com/xzhengethz/linuxenv/blob/master/VirtualEnv.md
 #### install anaconda
 download Anaconda3-2019.10-Linux-x86_64.sh from https://www.anaconda.com/distribution/
 '''
-cd ./
-chmod +x Anaconda3-2019.10-Linux-x86_64.sh
-./Anaconda3-2019.10-Linux-x86_64.sh
+  cd ./
+  chmod +x Anaconda3-2019.10-Linux-x86_64.sh
+  ./Anaconda3-2019.10-Linux-x86_64.sh
 '''
 
 ## 配置模型训练环境
