@@ -91,11 +91,11 @@ python3 train_abb.py
 ## Learning Rate Strategy
 ``` python
 if global_steps < warmup_steps:
-lr = global_steps / warmup_steps * cfg.TRAIN.LR_INIT
+	lr = global_steps / warmup_steps * cfg.TRAIN.LR_INIT
 else:
-lr = cfg.TRAIN.LR_END + 0.5 * (cfg.TRAIN.LR_INIT - cfg.TRAIN.LR_END) * (
-    (1 + tf.cos((global_steps - warmup_steps) / (total_steps - warmup_steps) * np.pi))
-)
+	lr = cfg.TRAIN.LR_END + 0.5 * (cfg.TRAIN.LR_INIT - cfg.TRAIN.LR_END) * (
+	    (1 + tf.cos((global_steps - warmup_steps) / (total_steps - warmup_steps) * np.pi))
+	)
 ```
 <p align="center">
     <img width="60%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/LearningRateStrategy.png" style="max-width:80%;">
