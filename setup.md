@@ -1,10 +1,12 @@
 # Set Up Environment
 Requirements：
 ```
-python 3.6
+python 3.6+
 tensorflow 2.0
-numpy
-opencv
+cuda 10.0+
+cudnn 2.7.4+
+numpy 1.17.4 
+opencv-python 4.1.2.30 
 tqdm
 EasyDict
 ```
@@ -23,7 +25,7 @@ chmod +x Anaconda3-2019.10-Linux-x86_64.sh
 ```
 #### Create Virtual Environment with Anaconda
 ```
-conda create -n <VirtualEnv> python=3.6 pip tensorflow <package>
+conda create -n <VirtualEnv> python=3.6 pip tensorflow <package1> <package2> ...
 conda activate <VirtualEnv>
 pip install opencv-python
 ```
@@ -75,13 +77,14 @@ vim ./Toolkit/PVOCtoYolov3tf.py
         self.image_sets = [('YourDatasetName', 'year', 'val'),('YourDatasetName', 'year', 'train'),('YourDatasetName', 'year', 'test')]
 ```
 - Then put the .txt files to ./data/dataset/
-# Before Training
+# Train your model
+## Before Training
 - Make new file ./data/classes/YourData.names
 - Modify ./core/config.py
-# Training
+## Training
 ```
 python3 train_abb.py
 ```
-# Testing
+## Testing
 
 
