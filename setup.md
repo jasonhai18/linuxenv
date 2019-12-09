@@ -98,11 +98,11 @@ else:
 	)
 ```
 <p align="center">
-    <img width="60%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/LearningRateStrategy.png" style="max-width:80%;">
+    <img width="50%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/LearningRateStrategy.png" style="max-width:80%;">
     </a>
 </p>
 <p align="center">
-    <img width="60%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/TensorboardLoss.png" style="max-width:80%;">
+    <img width="90%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/TensorboardLoss.png" style="max-width:80%;">
     </a>
 </p>
 
