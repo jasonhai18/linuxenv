@@ -54,7 +54,7 @@ All folders are made using the Pascal VOC template.
 ## Train and Validation Set
 Randomly split all data into train, val and test set.
 - Choose the ratio of train, val and test, normally 8:1:1.
-- Modify ./Toolkit/DatasetSplit.py
+- Modify *./Toolkit/DatasetSplit.py*
 ```
 vim ./Toolkit/DatasetSplit.py
 ```
@@ -76,7 +76,7 @@ vim ./Toolkit/PVOCtoYolov3tf.py
 	self.root = 'YourOwnDatasetRootPath'
         self.image_sets = [('YourDatasetName', 'year', 'val'),('YourDatasetName', 'year', 'train'),('YourDatasetName', 'year', 'test')]
 ```
-- Then put the .txt files to ./data/dataset/
+- Then put the *.txt* files to *./data/dataset/*
 # Train your model
 ## Before Training
 - Make new file ./data/classes/YourData.names
