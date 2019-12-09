@@ -98,7 +98,7 @@ lr = cfg.TRAIN.LR_END + 0.5 * (cfg.TRAIN.LR_INIT - cfg.TRAIN.LR_END) * (
 )
 ```
 <p align="center">
-    <img width="60%" src="https://pjreddie.com/media/image/Screen_Shot_2018-03-24_at_10.48.42_PM.png" style="max-width:80%;">
+    <img width="60%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/LearningRateStrategy.png" style="max-width:80%;">
     </a>
 </p>
 
