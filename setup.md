@@ -57,7 +57,7 @@ DatasetSplit.split_trainval(0.95, 0.05, namelist=namelist)
 ```
 vim ./Toolkit/PVOCtoYolov3tf.py
 ```
-```
+``` python
 	self.root = 'YourOwnDatasetRootPath'
         self.image_sets = [('YourDatasetName', 'year', 'val'),('YourDatasetName', 'year', 'train'),('YourDatasetName', 'year', 'test')]
 ```
