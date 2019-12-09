@@ -36,8 +36,14 @@ pip install labelImg
 Here we use the Pascal VOC format to label the image(.xml).
 ## Folder
 All folders are made using the Pascal VOC template.
+## Train and Validation Set
+Randomly split all data into train, val and test set.
+- Choose the ratio of train, val and test, normally 8:1:1.
+- Modify ./Toolkit
 ## Convert the Pascal VOC format to the one which is used in YOLO v3 project
--Modify 
+- Modify .py
+```
+```
 -
 -
 
