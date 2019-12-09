@@ -98,7 +98,7 @@ else:
 	)
 ```
 <p align="center">
-    <img width="50%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/LearningRateStrategy.png" style="max-width:80%;">
+    <img width="30%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/LearningRateStrategy.png" style="max-width:80%;">
     </a>
 </p>
 <p align="center">
