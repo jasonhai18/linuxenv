@@ -4,8 +4,8 @@ Requirements：
 python 3.6+
 tensorflow 2.0
 cuda 10.0+
-cudnn 2.7.4+
-numpy 1.17.4 
+cudnn 2.6.0+
+numpy 1.16.0+ 
 opencv-python 4.1.2.30 
 tqdm
 EasyDict
