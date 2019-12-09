@@ -41,19 +41,34 @@ Randomly split all data into train, val and test set.
 - Choose the ratio of train, val and test, normally 8:1:1.
 - Modify ./Toolkit/DatasetSplit.py
 ```
-vim DatasetSplit.py
+vim ./Toolkit/DatasetSplit.py
 ```
 ``` python
-    self.anno_path = 'YourOwnDatasetPath'
-		self.img_path = 'YourOwnDatasetPath'
-		self.save_dir = 'YourOwnDatasetPath'
+	self.anno_path = 'YourOwnDatasetPath/Annotations/'
+	self.img_path = 'YourOwnDatasetPath/JPEGImages/'
+	self.save_dir = 'YourOwnDatasetPath/ImageSets/Main/'
+```
+change the ratio
+```
+DatasetSplit.split_trainval(0.95, 0.05, namelist=namelist)
 ```
 ## Convert the Pascal VOC format to the one which is used in YOLO v3 project
-- Modify .py
+- Modify ./Toolkit/PVOCtoYolov3tf.py
+```
+vim ./Toolkit/PVOCtoYolov3tf.py
 ```
 ```
--
--
-
+	self.root = 'YourOwnDatasetRootPath'
+        self.image_sets = [('YourDatasetName', 'year', 'val'),('YourDatasetName', 'year', 'train'),('YourDatasetName', 'year', 'test')]
+```
+- Then put the .txt files to ./data/dataset/
+# Before Training
+- Make new file ./data/classes/YourData.names
+- Modify ./core/config.py
+# Training
+```
+python3 train_abb.py
+```
+# Testing
 
 
