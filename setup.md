@@ -36,6 +36,19 @@ pip install labelImg
 Here we use the Pascal VOC format to label the image(.xml).
 ## Folder
 All folders are made using the Pascal VOC template.
+
+*architecture*
+```
+--- data --- dataset_a --- dataset_a + year --- Annotations
+	 |				    |- ImageSets --- Main
+	 |				    |- jpegImages
+	 |-- dataset_b --- dataset_a + year --- Annotations
+	 |				    |- ImageSets --- Main
+	 |				    |- jpegImages
+         |-- dataset_c --- dataset_a + year --- Annotations
+	 |				    |- ImageSets --- Main
+	 |				    |- jpegImages
+```
 ## Train and Validation Set
 Randomly split all data into train, val and test set.
 - Choose the ratio of train, val and test, normally 8:1:1.
