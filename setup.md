@@ -101,6 +101,12 @@ else:
     <img width="30%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/LearningRateStrategy.png" style="max-width:80%;">
     </a>
 </p>
+## Training Process
+<p align="center">
+    <img width="90%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/TensorboardLr.png" style="max-width:80%;">
+    </a>
+</p>
+
 <p align="center">
     <img width="90%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/TensorboardLoss.png" style="max-width:80%;">
     </a>
