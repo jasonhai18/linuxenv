@@ -81,40 +81,10 @@ vim ./Toolkit/PVOCtoYolov3tf.py
 ## 3.1 Model Introduction
 ### 3.1.1 ./core/backbone.py 
 the backbone of Yolo v3, darknet-53, return three feature maps
-|Network Architecture|Algorithmn|
-|zzz|``` python
-def darknet53(input_data):
 
-    input_data = common.convolutional(input_data, (3, 3,  3,  32))
-    input_data = common.convolutional(input_data, (3, 3, 32,  64), downsample=True)
-
-    for i in range(1):
-        input_data = common.residual_block(input_data,  64,  32, 64)
-
-    input_data = common.convolutional(input_data, (3, 3,  64, 128), downsample=True)
-
-    for i in range(2):
-        input_data = common.residual_block(input_data, 128,  64, 128)
-
-    input_data = common.convolutional(input_data, (3, 3, 128, 256), downsample=True)
-
-    for i in range(8):
-        input_data = common.residual_block(input_data, 256, 128, 256)
-
-    route_1 = input_data
-    input_data = common.convolutional(input_data, (3, 3, 256, 512), downsample=True)
-
-    for i in range(8):
-        input_data = common.residual_block(input_data, 512, 256, 512)
-
-    route_2 = input_data
-    input_data = common.convolutional(input_data, (3, 3, 512, 1024), downsample=True)
-
-    for i in range(4):
-        input_data = common.residual_block(input_data, 1024, 512, 1024)
-
-    return route_1, route_2, input_data
-    ```|
+| Network Architecture | Algorithmn |
+|---|---|
+|<img width="150%" src="https://raw.githubusercontent.com/YunYang1994/tensorflow-yolov3/1551aa4734added3ad0c6979ed2ed74894cdd504/docs/images/darknet53.png" style="max-width:150%;">|<img width="80%" src="https://user-images.githubusercontent.com/30433053/62342173-7ba89880-b518-11e9-8878-f1c38466eb39.png" style="max-width:70%;">|
 
 
 ## 3.1 Before Training
