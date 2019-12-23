@@ -141,7 +141,7 @@ def crop_img(image, bboxes):
 ### 3.1.4 ./core/config.py
 Some hyperparameters like learning rate, training epochs, warmup epochs, batch size, data augmentation.
 
-#### 3.1.4 ./core/yolov3.py
+### 3.1.5 ./core/yolov3.py
 <p align="center">
     <img width="90%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/levio.jpeg" style="max-width:80%;">
     </a>
@@ -224,7 +224,9 @@ for epoch in range(cfg.TRAIN.EPOCHS):
                 tf.summary.scalar("loss/conf_loss", conf_loss, step=global_steps)
                 tf.summary.scalar("loss/prob_loss", prob_loss, step=global_steps)
             writer.flush()
-
+```
+*Validation process*
+``` python
     val_tloss = float(0)
     val_itt = 0
     val_loss = float(0)
