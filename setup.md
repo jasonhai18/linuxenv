@@ -143,19 +143,139 @@ Some hyperparameters like learning rate, training epochs, warmup epochs, batch s
 
 #### 3.1.4 ./core/yolov3.py
 <p align="center">
-    <img width="90%" src="https://raw.githubusercontent.com/YunYang1994/tensorflow-yolov3/1551aa4734added3ad0c6979ed2ed74894cdd504/docs/images/levio.jpeg" style="max-width:80%;">
+    <img width="90%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/levio.jpeg" style="max-width:80%;">
     </a>
 </p>
 
 
-## 3.1 Before Training
+## 3.2 Before Training
 - Make new file ./data/classes/YourData.names
 - Modify ./core/config.py
-## 3.2 Training
+- ./train_abb.py
+*Load hyperparameters from ./core/config.py*
+``` python
+trainset = Dataset('train')
+valset = Dataset('val')
+logdir = "./data/log"
+steps_per_epoch = len(trainset)
+global_steps = tf.Variable(1, trainable=False, dtype=tf.int64)
+warmup_steps = cfg.TRAIN.WARMUP_EPOCHS * steps_per_epoch
+total_steps = cfg.TRAIN.EPOCHS * steps_per_epoch
+```
+*Encapsulate model with keras*
+``` python
+input_tensor = tf.keras.layers.Input([416, 416, 3])
+conv_tensors = YOLOv3(input_tensor)
+
+output_tensors = []
+for i, conv_tensor in enumerate(conv_tensors):
+    pred_tensor = decode(conv_tensor, i)
+    output_tensors.append(conv_tensor)
+    output_tensors.append(pred_tensor)
+
+model = tf.keras.Model(input_tensor, output_tensors)
+optimizer = tf.keras.optimizers.Adam()
+```
+*Training process*
+``` python
+if os.path.exists(logdir): shutil.rmtree(logdir)
+writer = tf.summary.create_file_writer(logdir)
+validate_writer = tf.summary.create_file_writer("./validate_log")
+val_loss_list = []
+
+for epoch in range(cfg.TRAIN.EPOCHS):
+    for image_data, target in trainset:
+        with tf.GradientTape() as tape:
+            pred_result = model(image_data, training=True)
+            giou_loss = conf_loss = prob_loss = 0
+
+            # optimizing process
+            for i in range(3):
+                conv, pred = pred_result[i * 2], pred_result[i * 2 + 1]
+                loss_items = compute_loss(pred, conv, *target[i], i)
+                giou_loss += loss_items[0]
+                conf_loss += loss_items[1]
+                prob_loss += loss_items[2]
+
+            total_loss = giou_loss + conf_loss + prob_loss
+
+            gradients = tape.gradient(total_loss, model.trainable_variables)
+            optimizer.apply_gradients(zip(gradients, model.trainable_variables))
+            tf.print("=> STEP %4d   EPOCH %4d   of %4d   in total   lr: %.6f   giou_loss: %4.2f   conf_loss: %4.2f   "
+                     "prob_loss: %4.2f   total_loss: %4.2f" % (global_steps, epoch + 1, cfg.TRAIN.EPOCHS,
+                                                               optimizer.lr.numpy(),
+                                                               giou_loss, conf_loss,
+                                                               prob_loss, total_loss))
+            # update learning rate
+            global_steps.assign_add(1)
+            if global_steps < warmup_steps:
+                lr = global_steps / warmup_steps * cfg.TRAIN.LR_INIT
+            else:
+                lr = cfg.TRAIN.LR_END + 0.5 * (cfg.TRAIN.LR_INIT - cfg.TRAIN.LR_END) * (
+                    (1 + tf.cos((global_steps - warmup_steps) / (total_steps - warmup_steps) * np.pi))
+                )
+            optimizer.lr.assign(lr.numpy())
+
+            # writing summary data
+            with writer.as_default():
+                tf.summary.scalar("lr", optimizer.lr, step=global_steps)
+                tf.summary.scalar("loss/total_loss", total_loss, step=global_steps)
+                tf.summary.scalar("loss/giou_loss", giou_loss, step=global_steps)
+                tf.summary.scalar("loss/conf_loss", conf_loss, step=global_steps)
+                tf.summary.scalar("loss/prob_loss", prob_loss, step=global_steps)
+            writer.flush()
+
+    val_tloss = float(0)
+    val_itt = 0
+    val_loss = float(0)
+    for image_data, target in valset:
+        val_itt += 1
+        pred_result = model(image_data, training=False)
+        giou_loss = conf_loss = prob_loss = 0
+
+        # optimizing process
+        for i in range(3):
+            conv, pred = pred_result[i * 2], pred_result[i * 2 + 1]
+            loss_items = compute_loss(pred, conv, *target[i], i)
+            giou_loss += loss_items[0]
+            conf_loss += loss_items[1]
+            prob_loss += loss_items[2]
+
+        total_loss = giou_loss + conf_loss + prob_loss
+        val_tloss += total_loss
+        tf.print("=> VALIDATION ON EPOCH %4d   giou_loss: %4.2f   conf_loss: %4.2f   "
+                 "prob_loss: %4.2f   total_loss: %4.2f" % (epoch + 1,
+                                                           giou_loss, conf_loss,
+                                                           prob_loss, total_loss))
+        # writing summary data
+        with validate_writer.as_default():
+            tf.summary.scalar("lr", optimizer.lr, step=global_steps)
+            tf.summary.scalar("validate_loss/total_loss", total_loss, step=global_steps)
+            tf.summary.scalar("validate_loss/giou_loss", giou_loss, step=global_steps)
+            tf.summary.scalar("validate_loss/conf_loss", conf_loss, step=global_steps)
+            tf.summary.scalar("validate_loss/prob_loss", prob_loss, step=global_steps)
+        validate_writer.flush()
+
+    val_loss = val_tloss / val_itt
+    val_loss_list.append(val_loss)
+    tf.print("==========> VALIDATION ON EPOCH %4d   average loss is %4.2f" %(epoch+1, val_loss))
+
+    model.save_weights("./yolov3/gauge")
+    # model.summary()
+    # converter = tf.lite.TFLiteConverter.from_keras_model(model)
+    # tflite_model = converter.convert()
+    # open("converted_model.tflite", "wb").write(tflite_model)
+
+
+val_loss_list1 = np.array(val_loss_list)
+print("===================> The roadmap of the average validation loss is")
+print(val_loss_list1)
+```
+## 3.3 Training
 ```
 python3 train_abb.py
 ```
-## 3.3 Testing
+## 3.4 Testing
 
 # 4 Tips and Tricks
 ## 4.1 Learning Rate Strategy
