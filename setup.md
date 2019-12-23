@@ -1,4 +1,4 @@
-# Set Up Environment
+# 1 Set Up Environment
 Requirements：
 ```
 python 3.6+
@@ -10,33 +10,33 @@ opencv-python 4.1.2.30
 tqdm
 EasyDict
 ```
-## Nvidia Driver
+## 1.1 Nvidia Driver
 https://github.com/xzhengethz/linuxenv/blob/master/NvidiaDriver.md
-## Set Up Virtual Environment
-### pip
+## 1.2 Set Up Virtual Environment
+### 1.3 Using pip
 https://github.com/xzhengethz/linuxenv/blob/master/VirtualEnv.md
-### conda
-#### Install Anaconda
+### 1.4 Using conda
+#### 1.4.1 Install Anaconda
 download Anaconda3-2019.10-Linux-x86_64.sh from https://www.anaconda.com/distribution/
 ```
 cd ./
 chmod +x Anaconda3-2019.10-Linux-x86_64.sh
 ./Anaconda3-2019.10-Linux-x86_64.sh
 ```
-#### Create Virtual Environment with Anaconda
+#### 1.4.2 Create Virtual Environment with Anaconda
 ```
 conda create -n <VirtualEnv> python=3.6 pip tensorflow <package1> <package2> ...
 conda activate <VirtualEnv>
 pip install opencv-python
 ```
-# Make Your Own Dataset
-## Label the Image
+# 2 Make Your Own Dataset
+## 2.1 Label the Image
 github repository: https://github.com/tzutalin/labelImg
 ```
 pip install labelImg
 ```
 Here we use the Pascal VOC format to label the image(.xml).
-## Folder
+## 2.2 Folder
 All folders are made using the Pascal VOC template.
 
 *architecture*
@@ -51,7 +51,7 @@ All folders are made using the Pascal VOC template.
 	 |				    |- ImageSets --- Main
 	 |				    |- JPEGImages
 ```
-## Train and Validation Set
+## 2.3 Train and Validation Set
 Randomly split all data into train, val and test set.
 - Choose the ratio of train, val and test, normally 8:1:1.
 - Modify *./Toolkit/DatasetSplit.py*
@@ -67,7 +67,7 @@ change the ratio
 ```
 DatasetSplit.split_trainval(0.95, 0.05, namelist=namelist)
 ```
-## Convert the Pascal VOC format to the one which is used in YOLO v3 project
+## 2.4 Convert the Pascal VOC format to the one which is used in YOLO v3 project
 - Modify ./Toolkit/PVOCtoYolov3tf.py
 ```
 vim ./Toolkit/PVOCtoYolov3tf.py
@@ -77,18 +77,57 @@ vim ./Toolkit/PVOCtoYolov3tf.py
         self.image_sets = [('YourDatasetName', 'year', 'val'),('YourDatasetName', 'year', 'train'),('YourDatasetName', 'year', 'test')]
 ```
 - Then put the *.txt* files to *./data/dataset/*
-# Train your model
-## Before Training
+# 3 Train your model
+## 3.1 Model Introduction
+### 3.1.1 ./core/backbone.py 
+the backbone of Yolo v3, darknet-53, return three feature maps
+|Network Architecture|Algorithmn|
+|zzz|``` python
+def darknet53(input_data):
+
+    input_data = common.convolutional(input_data, (3, 3,  3,  32))
+    input_data = common.convolutional(input_data, (3, 3, 32,  64), downsample=True)
+
+    for i in range(1):
+        input_data = common.residual_block(input_data,  64,  32, 64)
+
+    input_data = common.convolutional(input_data, (3, 3,  64, 128), downsample=True)
+
+    for i in range(2):
+        input_data = common.residual_block(input_data, 128,  64, 128)
+
+    input_data = common.convolutional(input_data, (3, 3, 128, 256), downsample=True)
+
+    for i in range(8):
+        input_data = common.residual_block(input_data, 256, 128, 256)
+
+    route_1 = input_data
+    input_data = common.convolutional(input_data, (3, 3, 256, 512), downsample=True)
+
+    for i in range(8):
+        input_data = common.residual_block(input_data, 512, 256, 512)
+
+    route_2 = input_data
+    input_data = common.convolutional(input_data, (3, 3, 512, 1024), downsample=True)
+
+    for i in range(4):
+        input_data = common.residual_block(input_data, 1024, 512, 1024)
+
+    return route_1, route_2, input_data
+    ```|
+
+
+## 3.1 Before Training
 - Make new file ./data/classes/YourData.names
 - Modify ./core/config.py
-## Training
+## 3.2 Training
 ```
 python3 train_abb.py
 ```
-## Testing
+## 3.3 Testing
 
-# Tips and Tricks
-## Learning Rate Strategy
+# 4 Tips and Tricks
+## 4.1 Learning Rate Strategy
 ``` python
 if global_steps < warmup_steps:
 	lr = global_steps / warmup_steps * cfg.TRAIN.LR_INIT
@@ -102,7 +141,7 @@ else:
     </a>
 </p>
 
-## Training Process
+## 4.2 Training Process
 <p align="center">
     <img width="90%" src="https://github.com/xzhengethz/linuxenv/blob/master/Images/TensorboardLr.png" style="max-width:80%;">
     </a>
