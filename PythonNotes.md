@@ -1,7 +1,23 @@
 With virtualenvwrapper (user friendly wrappers for the functionality of virtualenv)
 
-## Install virtualenv
-Install virtualenv with
+# Class
+## Importing a function from a class in another file?
+
+```python
+from otherfile import TheClass
+theclass = TheClass()
+# if you want to return the output of run
+return theclass.run()  
+# if you want to return run itself to be used later
+return theclass.run
+```
+or
+```python
+if __name__ == '__main__':
+    theclass = TheClass()
+    theclass.run()
+```
+in the same file as TheClass
 
 	sudo apt-get install virtualenv
 
